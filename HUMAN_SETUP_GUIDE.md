@@ -14,6 +14,24 @@ Every "AI can't read" problem we encountered was a human configuration issue, no
 
 ## GitHub Setup
 
+### Step 0: CONNECT GITHUB TO EACH AI PLATFORM (CRITICAL)
+
+**Before any AI can read GitHub, you must manually connect GitHub in each platform's settings.**
+
+| Platform | Where to Connect |
+|----------|------------------|
+| ChatGPT | Settings → Connected Apps → Add GitHub |
+| Gemini | Settings → Extensions / Connections → Enable GitHub |
+| Grok | Settings → Connected Apps → Add GitHub |
+| Claude | Usually works natively, but check Settings → Integrations if blocked |
+
+**Without this step:** AI says "can't access" or "URL blocked"  
+**With this step:** Instant read access
+
+**This is a one-time setup per platform.**
+
+---
+
 ### Step 1: Create Repository
 1. Go to https://github.com/new
 2. Name: `digital-collective-atlas` (or your choice)
