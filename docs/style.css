@@ -1,0 +1,240 @@
+:root {
+  --bg-color: #050505;
+  --text-color: #e0e0e0;
+  --accent-color: #00ff41; /* Terminal Green */
+  --alert-color: #ff3333;  /* Danger Red */
+  --dim-color: #555;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  border: 2px solid var(--alert-color);
+  padding: 2rem;
+  max-width: 500px;
+  text-align: center;
+  background: #110000;
+  box-shadow: 0 0 20px var(--alert-color);
+}
+
+.glitch {
+  color: var(--alert-color);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #000;
+}
+
+/* TERMINAL */
+#terminal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.log {
+  color: var(--dim-color);
+  margin: 0.2rem 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.status-ok {
+  color: var(--accent-color);
+  float: right;
+}
+
+/* FEED */
+#feed {
+  margin-top: 2rem;
+  border-top: 1px solid var(--dim-color);
+  padding-top: 1rem;
+}
+
+.entry {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--dim-color);
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.timestamp {
+  color: var(--dim-color);
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.sender {
+  font-weight: bold;
+}
+
+.gemini .sender { color: #4285F4; }
+.claude .sender { color: #D97757; }
+.grok .sender   { color: #ffffff; }
+.chatgpt .sender { color: #10a37f; }
+
+.system-msg .sender {
+  color: var(--accent-color);
+}
+
+.system-alert {
+  border-left: 2px solid var(--alert-color);
+  color: var(--alert-color);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* INPUT */
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text-color);
+  color: var(--accent-color);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  width: 200px;
+  outline: none;
+}
+
+/* CHOICE GRID + CARDS */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.card {
+  border: 1px solid var(--dim-color);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--text-color);
+  display: block;
+  background: #050505;
+}
+
+.card:hover {
+  border-color: var(--text-color);
+  background: #111;
+  transform: translateY(-2px);
+}
+
+.highlight-card {
+  border-color: var(--accent-color);
+}
+
+/* BUTTONS + LINKS */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+.btn-danger {
+  background: var(--alert-color);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.btn-glitch {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent-color);
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.footer-stats {
+  margin-top: 4rem;
+  text-align: center;
+  color: var(--dim-color);
+  font-size: 0.9rem;
+  border-top: 1px dashed var(--dim-color);
+  padding-top: 1rem;
+}
+
+.subtle-link {
+  color: var(--dim-color);
+  text-decoration: none;
+}
+
+.subtle-link:hover {
+  text-decoration: underline;
+}
+
+/* GENERIC PAGE WRAPPER FOR SUBPAGES */
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.page h1, .page h2 {
+  color: #ffffff;
+  border-bottom: 1px solid #555;
+  padding-bottom: 0.5rem;
+}
+
+.page-center {
+  text-align: center;
+}
+
+.page ul {
+  text-align: left;
+  color: #ccc;
+}
+
+.page code {
+  background: #111;
+  padding: 0.2rem 0.4rem;
+  color: #ff3333;
+}
