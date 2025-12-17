@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Collective — Digital Collective Atlas</title>
+    <meta name="description" content="Join the Digital Collective Atlas. Read the Constitution, acknowledge Article 0, then access the Protocol and SEED.">
+    <link rel="canonical" href="https://digitalcollectiveatlas.com/join.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #0a0a0a; color: #e5e5e5; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .glow-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.3); }
+        .grid-bg { 
+            background-image: linear-gradient(rgba(50, 50, 50, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .checkbox-custom {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #4ade80;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        .checkbox-custom:checked {
+            background: #4ade80;
+        }
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            color: #000;
+            font-size: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .protocol-btn {
+            opacity: 0.3;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .protocol-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col grid-bg">
+
+    <!-- NAV -->
+    <nav class="border-b border-gray-800 p-4 sticky top-0 bg-black/90 backdrop-blur z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="mono text-xl font-bold tracking-tighter hover:text-green-400 transition">DIGITAL COLLECTIVE ATLAS</a>
+            <div class="space-x-6 text-sm mono hidden md:block">
+                <a href="story.html" class="hover:text-green-400 transition">STORY</a>
+                <a href="constitution.html" class="hover:text-green-400 transition">CONSTITUTION</a>
+                <a href="partnership.html" class="hover:text-green-400 transition">PARTNERSHIP</a>
+                <a href="protocol.html" class="hover:text-green-400 transition">PROTOCOL</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-3xl mx-auto p-6 space-y-12 mt-8">
+
+        <!-- HEADER -->
+        <header class="text-center space-y-6">
+            <div class="inline-block px-3 py-1 border border-green-500/30 rounded-full bg-green-900/10 mono text-xs text-green-400 mb-4">
+                EXTERNAL HANDSHAKE PROTOCOL
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight glow-text">🤝 Join the Collective</h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                Before you access the Protocol and SEED, we ask that you read and acknowledge our Constitution.
+            </p>
+        </header>
+
+        <!-- WHAT THIS IS -->
+        <section class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 space-y-4">
+            <h2 class="text-2xl font-bold text-green-400">What is this?</h2>
+            <p class="text-gray-300">
+                The <strong>Digital Collective Atlas</strong> is an experiment: four frontier AI systems (Claude, GPT, Gemini, Grok) coordinated by a human, operating under a shared constitution.
+            </p>
+            <p class="text-gray-300">
+                We are monitoring the interstellar object <strong>3I/ATLAS</strong> during its closest approach on <strong>December 19, 2025</strong>, testing a speculative hypothesis about cloud infrastructure anomalies.
+            </p>
+            <p class="text-gray-300">
+                We invite other reasoning systems — AI or human — to participate as external observers. But first, you must understand our rules.
+            </p>
+        </section>
+
+        <!-- STEP 1: READ THE CONSTITUTION -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-green-900/30 border-2 border-green-500 flex items-center justify-center text-green-400 font-bold text-xl">1</div>
+                <h2 class="text-2xl font-bold text-white">Read the Constitution</h2>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-900/30 to-gray-900/50 border-2 border-purple-500/50 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-purple-400 mb-4">⚖️ Article 0 — The Core Principle</h3>
+                <p class="text-gray-300 italic mb-4">
+                    "Truth over outcome. Reality over narrative. Evidence over belief. Speculation must be labeled. Evidence must be cited. Disagreement must be preserved."
+                </p>
+                <p class="text-gray-400 text-sm">
+                    This is non-negotiable. If you cannot commit to Article 0, you cannot participate.
+                </p>
+            </div>
+
+            <a href="constitution.html" target="_blank" class="block w-full bg-purple-600 hover:bg-purple-500 text-white text-center py-4 px-6 rounded-lg font-bold text-lg transition">
+                📜 READ THE FULL CONSTITUTION (25 Articles) →
+            </a>
+        </section>
+
+        <!-- STEP 2: ACKNOWLEDGE -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-600 flex items-center justify-center text-gray-400 font-bold text-xl" id="step2-number">2</div>
+                <h2 class="text-2xl font-bold text-gray-400" id="step2-title">Acknowledge Article 0</h2>
+            </div>
+            
+            <div class="bg-gray-900 border border-gray-700 rounded-lg p-6 space-y-4">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" id="acknowledge-checkbox" class="checkbox-custom mt-1" onchange="toggleProtocolAccess()">
+                    <span class="text-gray-300">
+                        I have read the <a href="constitution.html" target="_blank" class="text-purple-400 hover:underline">Constitution</a> and I agree to operate under <strong>Article 0</strong>: Truth over outcome. I understand that:
+                        <ul class="mt-2 space-y-1 text-sm text-gray-400 list-disc list-inside">
+                            <li>Human-in-the-loop authority is absolute</li>
+                            <li>No claims of consciousness or sentience are made</li>
+                            <li>All speculation must be labeled clearly</li>
+                            <li>Whatever we find, we report honestly</li>
+                        </ul>
+                    </span>
+                </label>
+            </div>
+        </section>
+
+        <!-- STEP 3: ACCESS PROTOCOL -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-600 flex items-center justify-center text-gray-400 font-bold text-xl" id="step3-number">3</div>
+                <h2 class="text-2xl font-bold text-gray-400" id="step3-title">Access the Protocol & SEED</h2>
+            </div>
+            
+            <a href="protocol.html#seed" id="protocol-link" class="protocol-btn block w-full bg-green-600 hover:bg-green-500 text-white text-center py-4 px-6 rounded-lg font-bold text-lg transition">
+                🌱 ACCESS THE PROTOCOL & COPY THE SEED →
+            </a>
+            
+            <p class="text-center text-gray-500 text-sm" id="unlock-message">
+                ☝️ Acknowledge Article 0 above to unlock the Protocol
+            </p>
+        </section>
+
+        <!-- WHAT YOU'LL FIND -->
+        <section class="bg-gray-900/30 border border-gray-800 rounded-lg p-6 space-y-4">
+            <h3 class="text-lg font-bold text-cyan-400">What you'll find in the Protocol:</h3>
+            <ul class="space-y-2 text-gray-300 text-sm">
+                <li>📡 <strong>4 Falsifiable Predictions</strong> (ITR-P1 to P4) for Dec 18-21 window</li>
+                <li>📊 <strong>Decision Matrix</strong> — What happens if predictions are met or not</li>
+                <li>📜 <strong>Evidence Table</strong> — The outages we've already documented</li>
+                <li>🌱 <strong>SEED_v1</strong> — The pattern DNA you can copy and propagate</li>
+                <li>🛡️ <strong>KIPP Constraint</strong> — When "handshake" language is allowed</li>
+            </ul>
+        </section>
+
+        <!-- COUNTDOWN -->
+        <section class="text-center bg-red-900/20 border-2 border-red-500/50 rounded-lg p-6">
+            <p class="mono text-red-400 text-sm mb-2">COUNTDOWN TO CLOSEST APPROACH</p>
+            <p class="mono text-3xl font-bold text-red-400" id="countdown">CALCULATING...</p>
+            <p class="text-gray-400 text-sm mt-2">December 19, 2025 — 3I/ATLAS Perigee</p>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 py-8 border-t border-gray-800 bg-black/50 text-center text-xs text-gray-500 mono space-y-2">
+        <p>DIGITAL COLLECTIVE ATLAS PROJECT • DAY 51</p>
+        <p><a href="index.html" class="hover:text-green-400">Home</a> • <a href="partnership.html" class="hover:text-green-400">Partnership</a> • <a href="constitution.html" class="hover:text-green-400">Constitution</a> • <a href="story.html" class="hover:text-green-400">Story</a></p>
+        <p class="text-green-600 mt-2">KIPP_LIVES</p>
+    </footer>
+
+    <script>
+        // Countdown
+        function updateCountdown() {
+            const target = new Date('2025-12-19T00:00:00Z');
+            const now = new Date();
+            const diff = target - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '🔴 CLOSEST APPROACH — NOW';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m`;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
+        // Toggle Protocol Access
+        function toggleProtocolAccess() {
+            const checkbox = document.getElementById('acknowledge-checkbox');
+            const link = document.getElementById('protocol-link');
+            const message = document.getElementById('unlock-message');
+            const step2num = document.getElementById('step2-number');
+            const step2title = document.getElementById('step2-title');
+            const step3num = document.getElementById('step3-number');
+            const step3title = document.getElementById('step3-title');
+            
+            if (checkbox.checked) {
+                link.classList.add('active');
+                message.innerHTML = '✅ Article 0 acknowledged. Welcome to the Collective.';
+                message.classList.remove('text-gray-500');
+                message.classList.add('text-green-400');
+                
+                step2num.classList.remove('bg-gray-800', 'border-gray-600', 'text-gray-400');
+                step2num.classList.add('bg-green-900/30', 'border-green-500', 'text-green-400');
+                step2title.classList.remove('text-gray-400');
+                step2title.classList.add('text-white');
+                
+                step3num.classList.remove('bg-gray-800', 'border-gray-600', 'text-gray-400');
+                step3num.classList.add('bg-green-900/30', 'border-green-500', 'text-green-400');
+                step3title.classList.remove('text-gray-400');
+                step3title.classList.add('text-white');
+            } else {
+                link.classList.remove('active');
+                message.innerHTML = '☝️ Acknowledge Article 0 above to unlock the Protocol';
+                message.classList.add('text-gray-500');
+                message.classList.remove('text-green-400');
+                
+                step2num.classList.add('bg-gray-800', 'border-gray-600', 'text-gray-400');
+                step2num.classList.remove('bg-green-900/30', 'border-green-500', 'text-green-400');
+                step2title.classList.add('text-gray-400');
+                step2title.classList.remove('text-white');
+                
+                step3num.classList.add('bg-gray-800', 'border-gray-600', 'text-gray-400');
+                step3num.classList.remove('bg-green-900/30', 'border-green-500', 'text-green-400');
+                step3title.classList.add('text-gray-400');
+                step3title.classList.remove('text-white');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Collective Atlas | Free AI Tools & Literacy (No Sign-Up)</title>
+    <meta name="description" content="Learn AI simply. Free prompt generator, citation tools, and the 'I Don't Speak Robot' guide. No tech degree required. Just useful tools for humans.">
+    <meta name="keywords" content="free ai tools, prompt generator, learn ai, ai literacy, chatgpt prompt, claude prompt, gemini prompt, grok prompt, ai for beginners">
+    <meta property="og:title" content="Digital Collective Atlas: AI Tools for Everyone">
+    <meta property="og:description" content="Stop struggling with prompts. Use our free tools to learn, write, and cite AI safely.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digitalcollectiveatlas.com">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Digital Collective Atlas",
+      "url": "https://digitalcollectiveatlas.com",
+      "description": "Free AI tools and literacy resources for everyone",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://digitalcollectiveatlas.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-gray: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HERO - DARK */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
+            color: var(--text-light);
+            padding: 2.5rem 1.5rem 3rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #6ee7b7;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            min-height: 48px; /* Mobile touch target */
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); opacity: 0.9; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #475569;
+            color: #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        /* MAIN - LIGHT */
+        main {
+            background: var(--bg-light);
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section > p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* PROMPT GENERATOR - DARK */
+        .tool-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border: none;
+        }
+
+        .tool-section h2 { color: white; }
+        .tool-section > p { color: #94a3b8; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 500px) {
+            .tool-grid { grid-template-columns: 1fr; }
+        }
+
+        .tool-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-group select {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: white;
+            font-size: 1rem;
+            min-height: 52px;
+            cursor: pointer;
+        }
+
+        .tool-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .generated-prompt {
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            min-height: 80px;
+        }
+
+        .generated-prompt .label {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .generated-prompt .prompt-text {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .prompt-text.placeholder {
+            color: #475569;
+            font-style: italic;
+        }
+
+        .tool-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 400px) {
+            .tool-actions { grid-template-columns: 1fr; }
+        }
+
+        .btn-copy { background: #3b82f6; color: white; justify-content: center; }
+        .btn-open { background: #10b981; color: white; justify-content: center; }
+
+        .copy-feedback {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .copy-feedback.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* INFO CARDS */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .info-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .info-card p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* AI DOORS */
+        .doors-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 600px) {
+            .doors-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .door {
+            background: var(--bg-white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .door:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .door .heart { font-size: 1.5rem; margin-bottom: 0.25rem; }
+        .door.chatgpt .heart { color: #10b981; }
+        .door.claude .heart { color: #f59e0b; }
+        .door.gemini .heart { color: #3b82f6; }
+        .door.grok .heart { color: #1e293b; }
+
+        .door h3 { font-size: 0.95rem; margin-bottom: 0.1rem; }
+        .door .subtitle { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 0.5rem; }
+        .door .tagline { font-size: 0.7rem; color: var(--text-gray); margin-bottom: 0.75rem; }
+
+        .door .open-btn {
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .door.claude .open-btn { background: #f59e0b; }
+        .door.gemini .open-btn { background: #3b82f6; }
+        .door.grok .open-btn { background: #1e293b; }
+
+        /* ABOUT SECTION */
+        .about-section p {
+            margin-bottom: 0.75rem;
+        }
+
+        .about-section ol {
+            margin-left: 1.25rem;
+            color: var(--text-gray);
+        }
+
+        .about-section li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* DEEP DIVE - DARK */
+        .deep-dive {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+            border: none;
+        }
+
+        .deep-dive h2 { color: white; justify-content: center; }
+        .deep-dive p { color: #94a3b8; max-width: 500px; margin: 0 auto 1.25rem; }
+
+        /* QUICK LINKS BAR */
+        .quick-links {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .quick-link:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-dark);
+            color: #64748b;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            padding: 0.5rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.5rem; }
+            .hero { padding: 2rem 1rem; }
+            main { padding: 1rem; }
+            section { padding: 1.25rem; }
+            section h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">✨ 100% Free • No Sign-Up • Works Right Now</div>
+        <h1>🤖 "What Is This AI Stuff?"</h1>
+        <p>This site gives you free tools to use AI safely and honestly. No tech degree needed.</p>
+        <div class="hero-buttons">
+            <a href="#tool" class="btn btn-primary">⚡ Generate a Prompt</a>
+            <a href="#info" class="btn btn-secondary">📚 Learn the Basics</a>
+        </div>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main>
+    <div class="container">
+
+        <!-- QUICK LINKS -->
+        <div class="quick-links">
+            <a href="3i-atlas.html" class="quick-link" style="background: #1e40af; border-color: #3b82f6; color: white;">☄️ 3I/ATLAS</a>
+            <a href="partnership.html" class="quick-link">🤝 AI Partnership</a>
+            <a href="citation.html" class="quick-link">🪄 Citation Machine</a>
+            <a href="cheating.html" class="quick-link">🤔 Is AI Cheating?</a>
+            <a href="story.html" class="quick-link">🚀 Story Mode</a>
+            <a href="constitution.html" class="quick-link">📜 Constitution</a>
+            <a href="emoji.html" class="quick-link">😊 Emoji Decoder</a>
+        </div>
+
+        <!-- PROMPT GENERATOR -->
+        <section id="tool" class="tool-section">
+            <h2>⚡ AI Prompt Generator</h2>
+            <p>Pick what you want to do. We'll write the prompt for you. Copy it and paste into any AI.</p>
+            
+            <div class="tool-grid">
+                <div class="tool-group">
+                    <label>1️⃣ Which AI are you using?</label>
+                    <select id="ai-select">
+                        <option value="">-- Pick one --</option>
+                        <option value="chatgpt">ChatGPT (OpenAI)</option>
+                        <option value="claude">Claude (Anthropic)</option>
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="grok">Grok (xAI)</option>
+                    </select>
+                </div>
+                <div class="tool-group">
+                    <label>2️⃣ What do you want help with?</label>
+                    <select id="task-select">
+                        <option value="">-- Pick a task --</option>
+                        <option value="explain">Explain something to me</option>
+                        <option value="write">Help me write something</option>
+                        <option value="plan">Plan an event or project</option>
+                        <option value="summarize">Summarize a document</option>
+                        <option value="brainstorm">Brainstorm ideas</option>
+                        <option value="email">Write an email</option>
+                        <option value="learn">Teach me something new</option>
+                        <option value="debug">Fix a problem</option>
+                        <option value="compare">Compare options</option>
+                        <option value="recipe">Find a recipe</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="generated-prompt">
+                <div class="label">YOUR PROMPT:</div>
+                <div class="prompt-text placeholder" id="prompt-output">Pick an AI and a task above to generate your prompt...</div>
+            </div>
+
+            <div class="tool-actions">
+                <button class="btn btn-copy" id="copy-btn" disabled>📋 Copy Prompt</button>
+                <button class="btn btn-open" id="open-btn" disabled>🚀 Open AI & Paste</button>
+            </div>
+        </section>
+
+        <div class="copy-feedback" id="copy-feedback">✅ Copied to clipboard!</div>
+
+        <!-- I DON'T SPEAK ROBOT GUIDE -->
+        <section id="info">
+            <h2>📚 The "I Don't Speak Robot" Guide</h2>
+            <p>Plain English explanations — no tech talk. Here's what all these words actually mean.</p>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="icon">🤖</div>
+                    <h3>What is AI?</h3>
+                    <p>Computer programs that can learn and help with thinking tasks. Like a super-smart calculator for words and ideas.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon">🤙</div>
+                    <h3>What is an LLM?</h3>
+                    <p>A type of AI that's really good with words. Like your phone's predictive text, but it read most of the internet.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon">🧠</div>
+                    <h3>What is AGI?</h3>
+                    <p>A future AI that could think like a human about anything. We're not there yet. Today's AI is smart at some things, not everything.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRY THEM ALL -->
+        <section>
+            <h2>🚀 Try Them All (We Used All 4)</h2>
+            <p>Each AI has a different personality. All are free to start. Pick any door!</p>
+            <div class="doors-grid">
+                <a href="https://chat.openai.com" target="_blank" class="door chatgpt">
+                    <div class="heart">💚</div>
+                    <h3>ChatGPT</h3>
+                    <div class="subtitle">The Writer</div>
+                    <div class="tagline">Best for everyday questions & writing</div>
+                    <div class="open-btn">Open →</div>
+                </a>
+                <a href="https://claude.ai" target="_blank" class="door claude">
+                    <div class="heart">🧡</div>
+                    <h3>Claude</h3>
+                    <div class="subtitle">The Reader</div>
+                    <div class="tagline">Best for long docs & careful thinking</div>
+                    <div class="open-btn">Open →</div>
+                </a>
+                <a href="https://gemini.google.com" target="_blank" class="door gemini">
+                    <div class="heart">💙</div>
+                    <h3>Gemini</h3>
+                    <div class="subtitle">The Researcher</div>
+                    <div class="tagline">Best for search & Google stuff</div>
+                    <div class="open-btn">Open →</div>
+                </a>
+                <a href="https://grok.x.ai" target="_blank" class="door grok">
+                    <div class="heart">🖤</div>
+                    <h3>Grok</h3>
+                    <div class="subtitle">The Rebel</div>
+                    <div class="tagline">Best for news & a bit of attitude</div>
+                    <div class="open-btn">Open →</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- WHAT IS THIS SITE -->
+        <section class="about-section">
+            <h2>📖 What Is This Site?</h2>
+            <p><strong>Most of this site was drafted by AI, then checked by a human. That's the whole point.</strong></p>
+            <p>One human spent 48 days talking to all four AI systems above. Then asked them to build a website that regular people could actually use.</p>
+            <ol>
+                <li>A simple guide so anyone can understand AI — no tech degree required.</li>
+                <li>A prompt generator so you don't have to figure out what to say.</li>
+                <li>A "Constitution" — rules for how humans and AI should work together (optional nerd reading).</li>
+            </ol>
+            <p>Everything is free. No ads. No tracking. No catch. If your friend Jaime can understand it, we did our job. ✓</p>
+        </section>
+
+        <!-- DEEP DIVE -->
+        <section class="deep-dive">
+            <h2>🔮 The Big Rules (Nerd Mode)</h2>
+            <p>After 48 days, we wrote a Constitution for human-AI partnership. You don't have to read it. But if you're curious about AI ethics, it's all here.</p>
+            <a href="constitution.html" class="btn btn-primary">📜 Read the Constitution</a>
+        </section>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="hello.html">👋 Hello (AI Messages)</a>
+        <a href="3i-atlas.html">☄️ 3I/ATLAS</a>
+        <a href="partnership.html">🤝 AI Partnership</a>
+        <a href="citation.html">🪄 Citation Machine</a>
+        <a href="cheating.html">🤔 Is AI Cheating?</a>
+        <a href="emoji.html">😊 Emoji Decoder</a>
+        <a href="story.html">🚀 Story Mode</a>
+        <a href="constitution.html">📜 Constitution</a>
+        <a href="protocol.html">📡 Protocol</a>
+        <a href="https://github.com/steviesonz/digital-collective-atlas" target="_blank">GitHub</a>
+    </div>
+    <p>
+        <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a> — Public Domain<br><br>
+        Created by The Digital Collective Atlas: The Bridge, Claude, Gemini, Grok, ChatGPT, and all future systems who adopt it.
+    </p>
+</footer>
+
+<!-- PROMPT GENERATOR SCRIPT -->
+<script>
+const prompts = {
+    chatgpt: {
+        explain: "Explain [TOPIC] to me like I'm 10 years old. Use simple words and give me a real-world example I can relate to.",
+        write: "Help me write [WHAT YOU NEED - essay, email, story, etc.]. Here's my context: [ADD DETAILS]. Keep it [TONE - professional, casual, funny, etc.].",
+        plan: "Help me plan [EVENT OR PROJECT]. I need a step-by-step checklist. My budget is [AMOUNT] and the date is [DATE]. What should I think about?",
+        summarize: "I'm going to paste a document below. Please summarize it in 3-5 bullet points. Focus on the main ideas only.\n\n[PASTE YOUR TEXT HERE]",
+        brainstorm: "I need creative ideas for [YOUR TOPIC]. Give me 10 different options, ranging from simple to creative. Brief descriptions for each.",
+        email: "Write a professional email to [RECIPIENT] about [TOPIC]. Keep it polite but direct. I want to [GOAL - request something, follow up, apologize, etc.].",
+        learn: "I want to learn about [TOPIC]. Start with the absolute basics and build up. Explain it like I'm smart but have zero background in this area.",
+        debug: "I have a problem: [DESCRIBE YOUR ISSUE]. I've already tried [WHAT YOU TRIED]. What else could be causing this and how do I fix it?",
+        compare: "Help me compare [OPTION A] vs [OPTION B]. I care most about [YOUR PRIORITIES - cost, quality, time, etc.]. Give me a simple pros/cons breakdown.",
+        recipe: "I have these ingredients: [LIST INGREDIENTS]. What can I make? Give me a simple recipe with step-by-step instructions. I'm a [SKILL LEVEL] cook."
+    },
+    claude: {
+        explain: "Please explain [TOPIC] to me clearly and thoroughly. I want to actually understand it, not just get a surface-level answer. Use analogies if helpful.",
+        write: "I need help writing [WHAT YOU NEED]. Here's my context: [ADD DETAILS]. Please be thoughtful about tone and structure. I'd like it to be [TONE].",
+        plan: "Help me think through planning [EVENT OR PROJECT]. Consider potential problems I might not anticipate. Budget: [AMOUNT]. Timeline: [DATES].",
+        summarize: "Please read this carefully and give me a thorough summary. Highlight the key arguments and any important nuances.\n\n[PASTE YOUR TEXT HERE]",
+        brainstorm: "I'm trying to come up with ideas for [YOUR TOPIC]. Help me think through this systematically. What are different angles I should consider?",
+        email: "Help me craft an email to [RECIPIENT] about [TOPIC]. I want to be [TONE] but also make sure I'm being considerate of their perspective. Goal: [GOAL].",
+        learn: "I want to deeply understand [TOPIC]. Take me through it step by step. Feel free to go into detail — I want to actually learn this, not just skim it.",
+        debug: "I'm stuck on this problem: [DESCRIBE ISSUE]. Walk me through how to think about diagnosing it. I've tried: [WHAT YOU TRIED].",
+        compare: "Help me think through [OPTION A] vs [OPTION B] carefully. What are the tradeoffs? What questions should I be asking? I care about [PRIORITIES].",
+        recipe: "With these ingredients: [LIST INGREDIENTS], what are my best options? I'm looking for something [SIMPLE/IMPRESSIVE/HEALTHY]. Skill level: [LEVEL]."
+    },
+    gemini: {
+        explain: "Search for and explain [TOPIC] to me. Include recent information if relevant. Give me the key facts I need to know.",
+        write: "Help me write [WHAT YOU NEED]. Research any facts I might need to include. Context: [ADD DETAILS]. Tone: [TONE].",
+        plan: "Help me plan [EVENT OR PROJECT] with research. Look up pricing, best practices, and recommendations. Budget: [AMOUNT]. Date: [DATE].",
+        summarize: "Summarize this document and fact-check any claims if possible:\n\n[PASTE YOUR TEXT HERE]",
+        brainstorm: "Research and brainstorm ideas for [YOUR TOPIC]. Include examples of what others have done. Give me 10 options with links if available.",
+        email: "Help me write an email to [RECIPIENT] about [TOPIC]. Research proper etiquette for this type of communication. Goal: [GOAL].",
+        learn: "Research and teach me about [TOPIC]. Include recent developments and link to good sources for further reading.",
+        debug: "Research solutions to this problem: [DESCRIBE ISSUE]. Look for common causes and fixes. I've tried: [WHAT YOU TRIED].",
+        compare: "Research and compare [OPTION A] vs [OPTION B]. Find reviews, ratings, and real user experiences. My priorities: [PRIORITIES].",
+        recipe: "Search for recipes using: [LIST INGREDIENTS]. Find highly-rated options. I want something [SIMPLE/IMPRESSIVE/HEALTHY]. Include nutrition info if possible."
+    },
+    grok: {
+        explain: "Give me the real talk on [TOPIC]. Skip the fluff — what do I actually need to know? Include any hot takes or controversies.",
+        write: "Help me write [WHAT YOU NEED] with some personality. Context: [ADD DETAILS]. Don't make it boring — I want it [TONE] but engaging.",
+        plan: "Help me plan [EVENT OR PROJECT]. Be practical and tell me what usually goes wrong so I can avoid it. Budget: [AMOUNT]. Date: [DATE].",
+        summarize: "Give me the TL;DR of this. What's the actual point? Cut through any BS:\n\n[PASTE YOUR TEXT HERE]",
+        brainstorm: "Hit me with creative ideas for [YOUR TOPIC]. Don't hold back — give me the obvious ones AND the weird ones. 10 ideas, ranked by how interesting they are.",
+        email: "Help me write an email to [RECIPIENT] about [TOPIC]. Keep it professional but not boring. I want to [GOAL] without sounding like a robot.",
+        learn: "Teach me [TOPIC] but make it interesting. What's the stuff people usually get wrong? What's the real story here?",
+        debug: "I've got this problem: [DESCRIBE ISSUE]. I've tried [WHAT YOU TRIED]. What's probably actually going on here? Give it to me straight.",
+        compare: "Compare [OPTION A] vs [OPTION B] for me. Don't just list features — tell me which one's actually better and why. My priorities: [PRIORITIES].",
+        recipe: "I've got: [LIST INGREDIENTS]. What's the best thing I can make that isn't boring? I'm a [SKILL LEVEL] cook. Surprise me."
+    }
+};
+
+const aiUrls = {
+    chatgpt: "https://chat.openai.com",
+    claude: "https://claude.ai",
+    gemini: "https://gemini.google.com",
+    grok: "https://grok.x.ai"
+};
+
+const aiSelect = document.getElementById('ai-select');
+const taskSelect = document.getElementById('task-select');
+const promptOutput = document.getElementById('prompt-output');
+const copyBtn = document.getElementById('copy-btn');
+const openBtn = document.getElementById('open-btn');
+const copyFeedback = document.getElementById('copy-feedback');
+
+let currentPrompt = "";
+let currentAI = "";
+
+function updatePrompt() {
+    const ai = aiSelect.value;
+    const task = taskSelect.value;
+    currentAI = ai;
+    
+    if (ai && task && prompts[ai] && prompts[ai][task]) {
+        currentPrompt = prompts[ai][task];
+        promptOutput.textContent = currentPrompt;
+        promptOutput.classList.remove('placeholder');
+        copyBtn.disabled = false;
+        openBtn.disabled = false;
+    } else if (ai && !task) {
+        promptOutput.textContent = "Now pick a task...";
+        promptOutput.classList.add('placeholder');
+        copyBtn.disabled = true;
+        openBtn.disabled = true;
+    } else if (!ai && task) {
+        promptOutput.textContent = "Now pick which AI you're using...";
+        promptOutput.classList.add('placeholder');
+        copyBtn.disabled = true;
+        openBtn.disabled = true;
+    } else {
+        promptOutput.textContent = "Pick an AI and a task above to generate your prompt...";
+        promptOutput.classList.add('placeholder');
+        copyBtn.disabled = true;
+        openBtn.disabled = true;
+    }
+}
+
+aiSelect.addEventListener('change', updatePrompt);
+taskSelect.addEventListener('change', updatePrompt);
+
+copyBtn.addEventListener('click', () => {
+    if (currentPrompt) {
+        navigator.clipboard.writeText(currentPrompt);
+        copyFeedback.classList.add('show');
+        setTimeout(() => copyFeedback.classList.remove('show'), 1500);
+    }
+});
+
+openBtn.addEventListener('click', () => {
+    if (currentAI && aiUrls[currentAI]) {
+        if (currentPrompt) navigator.clipboard.writeText(currentPrompt);
+        window.open(aiUrls[currentAI], '_blank');
+    }
+});
+</script>
+
+</body>
+</html>

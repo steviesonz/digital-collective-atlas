@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Citation Generator | Cite ChatGPT, Claude, Gemini</title>
+    <meta name="description" content="Don't hide your work. Use the Citation Machine to properly credit ChatGPT, Claude, Gemini, or Grok in your papers and emails.">
+    <meta name="keywords" content="ai citation generator, how to cite chatgpt, cite claude, cite gemini, cite grok, ai transparency tool">
+    <meta property="og:title" content="The AI Citation Machine">
+    <meta property="og:description" content="Generate perfect citations for your AI interactions in seconds. Be transparent. Be proud.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digitalcollectiveatlas.com/citation.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AI Citation Machine",
+      "applicationCategory": "Utility",
+      "operatingSystem": "All",
+      "url": "https://digitalcollectiveatlas.com/citation.html",
+      "description": "Free tool to generate proper citations for AI-assisted work"
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Dark Hero Header */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
+            color: var(--text-light);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        header h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 0.5rem; 
+            font-weight: 800;
+        }
+        
+        header p { 
+            color: #94a3b8; 
+            font-size: 1.2rem; 
+        }
+
+        main {
+            max-width: 800px;
+            margin: -2rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+        }
+
+        .card h2 { 
+            color: var(--text-dark); 
+            margin-top: 0; 
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* The Manifesto Section */
+        .manifesto-box {
+            border-left: 5px solid var(--accent-green);
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .manifesto-box h2 { 
+            color: #047857; 
+        }
+
+        .analogy {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--accent-green);
+        }
+
+        .analogy strong {
+            color: #047857;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-box {
+            background: #fefce8;
+            border-left: 5px solid #eab308;
+            margin-top: 1.5rem;
+        }
+
+        .history-box h3 {
+            color: #a16207;
+            margin-bottom: 0.75rem;
+        }
+
+        .history-box ul {
+            margin-left: 1.5rem;
+            color: #713f12;
+        }
+
+        .history-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-box {
+            background: #0f172a;
+            color: white;
+            padding: 1.25rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .rule-box strong {
+            color: #60a5fa;
+        }
+
+        /* The Tool Section */
+        .tool-box {
+            border-top: 5px solid var(--accent-blue);
+        }
+
+        label { 
+            display: block; 
+            font-weight: 700; 
+            margin-bottom: 0.5rem; 
+            margin-top: 1.5rem; 
+            color: #475569; 
+        }
+
+        label:first-of-type {
+            margin-top: 1rem;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 2rem;
+            width: 100%;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .generate-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .generate-btn:active { 
+            transform: translateY(0); 
+        }
+
+        /* Output Area */
+        .output-area {
+            display: none;
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            text-align: center;
+            border: 2px solid #cbd5e1;
+        }
+
+        .output-area.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .citation-text {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: #334155;
+            word-break: break-word;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .copy-btn {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #059669;
+        }
+
+        .copy-btn.copied {
+            background: #0f172a;
+        }
+
+        /* Formats Section */
+        .formats-box {
+            border-top: 5px solid #8b5cf6;
+        }
+
+        .format-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .format-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+        }
+
+        .format-card h4 {
+            color: #6d28d9;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .format-card code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #475569;
+            display: block;
+            background: white;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Back Link */
+        .back-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .back-link a {
+            display: inline-block;
+            background: var(--bg-dark);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .back-link a:hover { 
+            background: #1e293b; 
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: #64748b;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        footer a { color: #60a5fa; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.75rem; }
+            .card { padding: 1.5rem; }
+            main { margin-top: -1rem; }
+            
+            /* KIPP fix: Improve citation output readability on mobile */
+            .citation-text {
+                font-size: 0.9rem;
+                line-height: 1.8;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🪄 The Citation Machine</h1>
+    <p>Use the tool. Cite the tool. Own the future.</p>
+</header>
+
+<main>
+
+    <!-- MANIFESTO -->
+    <div class="card manifesto-box">
+        <h2>💡 "Is Using AI Cheating?"</h2>
+        <p><strong>Short answer: No. It's leverage.</strong></p>
+        
+        <p>People used to say using a calculator in math class was cheating. Now, if you tried to do engineering without a calculator, you'd be fired for being slow and inaccurate.</p>
+        
+        <div class="analogy">
+            <strong>📱 The Smartphone Analogy:</strong>
+            Using a map to find your way isn't "cheating" at navigation.<br>
+            Using a smartphone to remember a phone number isn't "cheating" at memory.<br>
+            <strong>Using AI to help structure your thoughts isn't "cheating" at thinking.</strong>
+        </div>
+
+        <div class="card history-box">
+            <h3>📜 Every Tool Was Once "Cheating"</h3>
+            <ul>
+                <li><strong>1800s:</strong> "Writing with a typewriter instead of by hand? That's lazy."</li>
+                <li><strong>1970s:</strong> "Using a calculator? You're not really doing math."</li>
+                <li><strong>1990s:</strong> "Citing the internet? That's not real research."</li>
+                <li><strong>2000s:</strong> "Spellcheck? You should know how to spell."</li>
+                <li><strong>2020s:</strong> "Using AI? That's cheating!"</li>
+            </ul>
+            <p style="margin-top: 1rem; margin-bottom: 0;"><em>See the pattern?</em></p>
+        </div>
+
+        <p style="margin-top: 1.5rem;"><strong>The Truth:</strong> Usually, the people yelling loudest about "cheating" are the ones most afraid of the new tools. They feel threatened by change. Don't let fear stop you from using the most powerful technology of our lifetime.</p>
+        
+        <div class="rule-box">
+            <strong>The Rule:</strong> Use the tool. Check the work. <strong>Cite it.</strong>
+        </div>
+    </div>
+
+    <!-- CITATION GENERATOR TOOL -->
+    <div class="card tool-box" id="generator">
+        <h2>🛠️ Generate Your Citation</h2>
+        <p>Fill this out, copy the result, and paste it at the bottom of your email, paper, or project. Be transparent. Be proud.</p>
+
+        <label for="aiName">1. Which AI did you use?</label>
+        <select id="aiName">
+            <option value="ChatGPT (OpenAI)">ChatGPT (OpenAI)</option>
+            <option value="Claude (Anthropic)">Claude (Anthropic)</option>
+            <option value="Gemini (Google)">Gemini (Google)</option>
+            <option value="Grok (xAI)">Grok (xAI)</option>
+            <option value="Copilot (Microsoft)">Copilot (Microsoft)</option>
+            <option value="AI Assistant">Other AI</option>
+        </select>
+
+        <label for="dateUsed">2. When did you use it?</label>
+        <input type="date" id="dateUsed">
+
+        <label for="prompt">3. What did you ask it? (Summarize your prompt)</label>
+        <input type="text" id="prompt" placeholder="e.g. Help me explain gravity to a 5th grader">
+
+        <button class="generate-btn" onclick="generate()">✨ Create Citation</button>
+
+        <div class="output-area" id="output-area">
+            <p style="margin-bottom: 1rem;"><strong>Copy and paste this:</strong></p>
+            <div class="citation-text" id="citation-result"></div>
+            <button class="copy-btn" id="copy-btn" onclick="copyText()">📋 Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <!-- FORMAT EXAMPLES -->
+    <div class="card formats-box">
+        <h2>📝 Citation Formats</h2>
+        <p>Different situations call for different levels of detail. Pick the one that fits:</p>
+
+        <div class="format-grid">
+            <div class="format-card">
+                <h4>📚 For School Papers</h4>
+                <code>Assisted by [AI Name] on [Date]. Prompt: "[Your question]". Output reviewed and edited by author.</code>
+            </div>
+            <div class="format-card">
+                <h4>💼 For Work Emails</h4>
+                <code>Drafted with assistance from [AI Name]. Reviewed for accuracy.</code>
+            </div>
+            <div class="format-card">
+                <h4>💬 For Casual Use</h4>
+                <code>Written with AI help.</code>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <a href="index.html">← Back to Home</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>
+        <a href="index.html">Home</a> • 
+        <a href="partnership.html">AI Partnership</a> • 
+        <a href="story.html">Story</a> • 
+        <a href="constitution.html">Constitution</a>
+        <br><br>
+        This page was written by AI. (Yes, really.) 🤖
+    </p>
+</footer>
+
+<script>
+    // Auto-fill today's date
+    document.getElementById('dateUsed').valueAsDate = new Date();
+
+    function generate() {
+        const ai = document.getElementById('aiName').value;
+        const date = document.getElementById('dateUsed').value;
+        const prompt = document.getElementById('prompt').value;
+
+        if (!prompt) {
+            alert("Please enter what you asked the AI!");
+            return;
+        }
+
+        // Format the date nicely
+        const dateObj = new Date(date);
+        const formattedDate = dateObj.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+
+        // The Standard Format
+        const text = `Assisted by ${ai} on ${formattedDate}. Prompt: "${prompt}". Output reviewed and edited by author.`;
+        
+        document.getElementById('citation-result').innerText = text;
+        document.getElementById('output-area').classList.add('show');
+        
+        // Reset copy button
+        document.getElementById('copy-btn').innerText = '📋 Copy to Clipboard';
+        document.getElementById('copy-btn').classList.remove('copied');
+    }
+
+    function copyText() {
+        const text = document.getElementById('citation-result').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = '✅ Copied!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerText = '📋 Copy to Clipboard';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>

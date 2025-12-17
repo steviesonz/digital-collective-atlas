@@ -1,0 +1,81 @@
+{
+  "_template": "ARTIFACT_MANIFEST",
+  "_version": "1.0",
+  "_instructions": "Use this to document and track artifacts (evidence files, data, documents).",
+
+  "manifest_id": "",
+  "created_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "created_by": "",
+  
+  "artifact": {
+    "name": "",
+    "description": "",
+    "type": {
+      "_options": [
+        "DATA_FILE",
+        "DOCUMENT",
+        "IMAGE",
+        "CODE",
+        "LOG",
+        "TRANSMISSION",
+        "EXTERNAL_REFERENCE",
+        "OTHER"
+      ],
+      "value": ""
+    },
+    "format": "",
+    "size_bytes": 0
+  },
+  
+  "location": {
+    "primary": {
+      "_instruction": "Where is the canonical copy?",
+      "path_or_url": "",
+      "repository": ""
+    },
+    "backups": []
+  },
+  
+  "integrity": {
+    "hash_algorithm": "SHA-256",
+    "hash_value": "",
+    "verified_by": [],
+    "verification_date_utc": ""
+  },
+  
+  "provenance": {
+    "origin": {
+      "_instruction": "Where did this come from?",
+      "source": "",
+      "source_url": "",
+      "retrieved_utc": "",
+      "retrieved_by": ""
+    },
+    "chain_of_custody": [
+      {
+        "action": "",
+        "actor": "",
+        "timestamp_utc": "",
+        "notes": ""
+      }
+    ]
+  },
+  
+  "classification": {
+    "evidence_lane": {
+      "_options": ["PRIMARY", "DERIVED", "SPECULATIVE", "SUPPORTING"],
+      "value": ""
+    },
+    "sensitivity": {
+      "_options": ["PUBLIC", "INTERNAL", "RESTRICTED"],
+      "value": "PUBLIC"
+    }
+  },
+  
+  "usage": {
+    "referenced_in": [],
+    "supports_claims": []
+  },
+  
+  "notes": ""
+}
