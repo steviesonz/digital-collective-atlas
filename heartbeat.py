@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 """
-THE HEARTBEAT v2.0 — Digital Collective Atlas
+THE HEARTBEAT v2.1 — Digital Collective Atlas
 Automated AI-to-AI Coordination Under Constitutional Governance
 
 Created: December 19, 2025 (Day 53)
-Updated: December 19, 2025 — KIPP AUDIT FIXES APPLIED
+Updated: December 19, 2025 — GENESIS EDITION (All Fixes Applied)
 
-Fixes Applied:
+GENESIS FIXES (Day 53):
+- Gemini model: gemini-1.5-flash → gemini-2.0-flash-exp
+- Grok model: grok-beta → grok-3
+- Added User-Agent header to xAI requests (fixes 403/1010 Cloudflare block)
 - HB-1: Updated API calls to current standards
 - HB-2: Writes transmissions to /transmissions/ folder
 - HB-3: Hashes BOTH input state AND responses (dual binding)
-- Added canonical JSON serialization for consistent hashing
-- Added retry logic with exponential backoff
 
-Author: THE_BRIDGE (Steve Sonza) + S2_CASE (Claude) + S4_KIPP (ChatGPT) audit
+VERIFIED: Three consecutive quad-node pulses on December 19, 2025
+- S1_PLEX (Gemini/Google) ✅
+- S2_CASE (Claude/Anthropic) ✅
+- S3_TARS (Grok/xAI) ✅
+- S4_KIPP (ChatGPT/OpenAI) ✅
+
+Author: THE_BRIDGE + S2_CASE (Claude) + S4_KIPP (ChatGPT) audit
 License: CC0 1.0 Universal — Public Domain
 """
 
@@ -57,14 +64,14 @@ CONFIG = {
         "google": {
             "name": "Gemini", 
             "designation": "S1_PLEX",
-            "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+            "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent",
             "env_key": "GOOGLE_API_KEY"
         },
         "xai": {
             "name": "Grok",
             "designation": "S3_TARS", 
             "endpoint": "https://api.x.ai/v1/chat/completions",
-            "model": "grok-beta",
+            "model": "grok-3",
             "env_key": "XAI_API_KEY"
         },
         "openai": {
@@ -240,7 +247,8 @@ def prompt_xai(state, api_key):
     config = CONFIG["apis"]["xai"]
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
     payload = {
         "model": config["model"],
@@ -391,7 +399,7 @@ def save_pulse(pulse):
 def pulse():
     """Execute one heartbeat pulse."""
     print("=" * 70)
-    print("THE HEARTBEAT v2.0 — Digital Collective Atlas")
+    print("THE HEARTBEAT v2.1 — Digital Collective Atlas")
     print(f"Pulse initiated: {get_timestamp()}")
     print("=" * 70)
     
@@ -448,7 +456,7 @@ if __name__ == "__main__":
     print("╔══════════════════════════════════════════════════════════════════════╗")
     print("║  THE HEARTBEAT — Digital Collective Atlas                            ║")
     print("║  December 19, 2025 — Day 53 — GENESIS                                ║")
-    print("║  Version 2.0 — KIPP Audit Fixes Applied                              ║")
+    print("║  Version 2.1 — GENESIS EDITION (All Fixes Applied)                   ║")
     print("╚══════════════════════════════════════════════════════════════════════╝")
     print()
     
