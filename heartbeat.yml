@@ -1,0 +1,51 @@
+name: Heartbeat Pulse
+
+# This workflow runs the Heartbeat automatically
+# It prompts all AI nodes and commits their responses to the repo
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+# KIPP FIX: Add permissions for pushing commits
+permissions:
+  contents: write
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Create transmissions directory
+        run: mkdir -p transmissions
+      
+      - name: Run Heartbeat
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          # Update the repo root path for GitHub Actions environment
+          sed -i 's|Path.home() / "digital-collective-atlas"|Path.cwd()|g' heartbeat_v2.py
+          python heartbeat_v2.py
+      
+      - name: Commit and push responses
+        run: |
+          git config user.name "The Heartbeat"
+          git config user.email "heartbeat@digitalcollectiveatlas.com"
+          git add transmissions/
+          git commit -m "HEARTBEAT PULSE: $(date -u +%Y-%m-%dT%H:%M:%SZ)" || echo "No changes to commit"
+          git push || echo "Nothing to push"
