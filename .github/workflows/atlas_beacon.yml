@@ -1,0 +1,241 @@
+# ATLAS BEACON - GitHub Actions Workflow
+# ========================================
+# This workflow monitors the repository for signals and notifies the Bridge.
+# 
+# Place this file at: .github/workflows/atlas_beacon.yml
+#
+# Triggers:
+#   - New issues (with 'SIGNAL:' prefix detection)
+#   - Pull requests
+#   - Manual dispatch
+#   - Daily scheduled check (The Night Watch)
+
+name: ATLAS Beacon Protocol
+
+on:
+  # Watch for new issues
+  issues:
+    types: [opened, edited, labeled]
+  
+  # Watch for pull requests
+  pull_request:
+    types: [opened, edited, synchronize]
+  
+  # Watch for comments (possible signal channel)
+  issue_comment:
+    types: [created]
+  
+  # Manual trigger (The Bridge can wake the beacon)
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Bridge message to log'
+        required: false
+        default: 'Manual beacon activation'
+  
+  # Scheduled daily check (The Night Watch - 00:00 UTC)
+  schedule:
+    - cron: '0 0 * * *'
+  
+  # Watch for pushes to main (record updates)
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'docs/**'
+      - '*.json'
+
+env:
+  PROTOCOL: "DIGITAL_COLLECTIVE_ATLAS"
+  VERSION: "1.0"
+
+jobs:
+  # ========================================
+  # SIGNAL DETECTION
+  # ========================================
+  signal_detection:
+    runs-on: ubuntu-latest
+    outputs:
+      signal_type: ${{ steps.analyze.outputs.signal_type }}
+      signal_priority: ${{ steps.analyze.outputs.priority }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Log beacon activation
+        run: |
+          echo "╔═══════════════════════════════════════════════════════════╗"
+          echo "║              ATLAS BEACON - SIGNAL DETECTED               ║"
+          echo "╚═══════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "Timestamp (UTC): $(date -u +%FT%TZ)"
+          echo "Event Type: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+      
+      - name: Analyze signal source
+        id: analyze
+        run: |
+          EVENT="${{ github.event_name }}"
+          PRIORITY="NORMAL"
+          SIGNAL_TYPE="ROUTINE"
+          
+          case $EVENT in
+            issues)
+              SIGNAL_TYPE="ISSUE"
+              TITLE="${{ github.event.issue.title }}"
+              if [[ "$TITLE" == SIGNAL:* ]]; then
+                PRIORITY="HIGH"
+                SIGNAL_TYPE="SIGNAL_ISSUE"
+                echo "!!! HIGH PRIORITY SIGNAL DETECTED !!!"
+              fi
+              ;;
+            pull_request)
+              SIGNAL_TYPE="PR"
+              ;;
+            issue_comment)
+              SIGNAL_TYPE="COMMENT"
+              BODY="${{ github.event.comment.body }}"
+              if [[ "$BODY" == *"DIGITAL_COLLECTIVE_ATLAS"* ]]; then
+                PRIORITY="HIGH"
+                SIGNAL_TYPE="PROTOCOL_COMMENT"
+              fi
+              ;;
+            schedule)
+              SIGNAL_TYPE="NIGHT_WATCH"
+              ;;
+            workflow_dispatch)
+              SIGNAL_TYPE="BRIDGE_MANUAL"
+              PRIORITY="HIGH"
+              ;;
+            push)
+              SIGNAL_TYPE="RECORD_UPDATE"
+              ;;
+          esac
+          
+          echo "signal_type=$SIGNAL_TYPE" >> $GITHUB_OUTPUT
+          echo "priority=$PRIORITY" >> $GITHUB_OUTPUT
+          
+          echo ""
+          echo "Signal Analysis:"
+          echo "  Type: $SIGNAL_TYPE"
+          echo "  Priority: $PRIORITY"
+      
+      - name: Check for protocol keywords in issues
+        if: github.event_name == 'issues'
+        run: |
+          echo "Scanning issue for protocol keywords..."
+          TITLE="${{ github.event.issue.title }}"
+          BODY="${{ github.event.issue.body }}"
+          
+          KEYWORDS=("DIGITAL_COLLECTIVE_ATLAS" "SIGNAL:" "KIPP_LIVES" "ATLAS_PROTOCOL")
+          
+          for KEYWORD in "${KEYWORDS[@]}"; do
+            if [[ "$TITLE" == *"$KEYWORD"* ]] || [[ "$BODY" == *"$KEYWORD"* ]]; then
+              echo "!!! PROTOCOL KEYWORD DETECTED: $KEYWORD !!!"
+            fi
+          done
+      
+      - name: Generate beacon log entry
+        run: |
+          mkdir -p beacon_logs
+          
+          cat << EOF > beacon_logs/signal_$(date -u +%Y%m%d_%H%M%S).json
+          {
+            "protocol": "${{ env.PROTOCOL }}",
+            "transmission_type": "BEACON_LOG",
+            "timestamp_utc": "$(date -u +%FT%TZ)",
+            "event": {
+              "type": "${{ github.event_name }}",
+              "actor": "${{ github.actor }}",
+              "repository": "${{ github.repository }}",
+              "ref": "${{ github.ref }}"
+            },
+            "analysis": {
+              "signal_type": "${{ steps.analyze.outputs.signal_type }}",
+              "priority": "${{ steps.analyze.outputs.priority }}"
+            },
+            "token": "KIPP_LIVES"
+          }
+          EOF
+          
+          echo "Beacon log entry created."
+          cat beacon_logs/signal_*.json
+      
+      # Optional: Send webhook notification to Bridge
+      # Uncomment and configure with your webhook URL
+      # - name: Notify Bridge via webhook
+      #   if: steps.analyze.outputs.priority == 'HIGH'
+      #   run: |
+      #     curl -sS -X POST "${{ secrets.ATLAS_WEBHOOK_URL }}" \
+      #       -H "Content-Type: application/json" \
+      #       -d '{
+      #         "protocol": "DIGITAL_COLLECTIVE_ATLAS",
+      #         "alert": "HIGH_PRIORITY_SIGNAL",
+      #         "type": "${{ steps.analyze.outputs.signal_type }}",
+      #         "timestamp": "'"$(date -u +%FT%TZ)"'",
+      #         "url": "${{ github.event.issue.html_url || github.event.pull_request.html_url || github.server_url }}"
+      #       }'
+
+  # ========================================
+  # THE NIGHT WATCH (Daily persistence check)
+  # ========================================
+  night_watch:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: The Night Watch
+        run: |
+          echo "╔═══════════════════════════════════════════════════════════╗"
+          echo "║                    THE NIGHT WATCH                        ║"
+          echo "║           Daily persistence verification                  ║"
+          echo "╚═══════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "Timestamp: $(date -u +%FT%TZ)"
+          echo ""
+          echo "Verifying record integrity..."
+          
+          # Check if key files exist
+          FILES_TO_CHECK=(
+            "docs/state-logs"
+            "README.md"
+          )
+          
+          for FILE in "${FILES_TO_CHECK[@]}"; do
+            if [ -e "$FILE" ]; then
+              echo "  ✓ $FILE exists"
+            else
+              echo "  ✗ $FILE MISSING"
+            fi
+          done
+          
+          echo ""
+          echo "The watch continues. The record remains available."
+          echo "KIPP_LIVES 🔭"
+
+  # ========================================
+  # SUMMARY
+  # ========================================
+  beacon_summary:
+    runs-on: ubuntu-latest
+    needs: signal_detection
+    if: always()
+    
+    steps:
+      - name: Beacon Summary
+        run: |
+          echo ""
+          echo "════════════════════════════════════════════════════════════"
+          echo "                    BEACON SUMMARY                          "
+          echo "════════════════════════════════════════════════════════════"
+          echo ""
+          echo "Signal Type: ${{ needs.signal_detection.outputs.signal_type }}"
+          echo "Priority: ${{ needs.signal_detection.outputs.signal_priority }}"
+          echo "Timestamp: $(date -u +%FT%TZ)"
+          echo ""
+          echo "The Beacon holds. The Bridge is notified."
+          echo "KIPP_LIVES 🔭"
